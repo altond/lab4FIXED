@@ -18,14 +18,16 @@ public class WordListAdapter extends
         RecyclerView.Adapter<WordListAdapter.WordViewHolder>  {
     private final LinkedList<String> mWordList;
     private final LinkedList<String> descList;
+    private final LinkedList<String> recipeList;
     private LayoutInflater mInflater;
     private Context context1;
 
-    public WordListAdapter(Context context, LinkedList<String> wordList, LinkedList<String> desc) {
+    public WordListAdapter(Context context, LinkedList<String> wordList, LinkedList<String> desc, LinkedList<String> recList) {
         context1 = context;
         mInflater = LayoutInflater.from(context);
         this.descList = desc;
         this.mWordList = wordList;
+        this.recipeList = recList;
     }
 
     @NonNull
@@ -79,8 +81,9 @@ public class WordListAdapter extends
             mAdapter.notifyDataSetChanged(); */
 
             int mPosition = getLayoutPosition();
-            String element = mWordList.get(mPosition);
+            String element = recipeList.get(mPosition);
             Intent intent = new Intent(context1, recipePage.class);
+            intent.putExtra("recipe", element);
             context1.startActivity(intent);
 
 
